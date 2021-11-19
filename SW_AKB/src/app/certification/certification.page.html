@@ -1,0 +1,38 @@
+<ion-app>
+  <ion-content class="main" >
+   <br>
+   <br>
+   <br>
+   <br>
+    <section >
+      <ion-img src='assets/sw_image/userlogin.png' style='width:100%;height:100%'></ion-img>
+  </section>
+   <br>
+   <br>
+   <br>
+   
+   <br>
+   <br>
+  
+    <section>
+     <ion-item lines="none">
+      {{name}}
+     </ion-item>
+    </section>
+   <br>
+    <section>
+      <ion-item lines="none"> 
+       {{phonenumber}}
+      </ion-item>
+    </section>
+    <br>
+    <div class="a">
+    <ion-input type="text"  placeholder="인증번호를입력하세요" ></ion-input>
+  </div>
+    <br>
+    <section>
+      <ion-button [routerLink]="['/find']" expand="block" color="">인증번호 확인</ion-button>
+    </section>
+
+  </ion-content>
+</ion-app>
