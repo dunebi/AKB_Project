@@ -26,10 +26,18 @@ export class CreateElectionPage {
   private s_d: string; 
   private e_d: string; 
   private summary: string;
+  private voteselect: string;
+  private voteselecttype : string='0';
 
   
   constructor() {}
 
+  changeVoteSelect(){
+    if (this.voteselect == '보통선거') {
+      this.voteselecttype = '1'
+    }
+      
+  }
   selectStartDate($event){
     this.startday = new Date($event.time);
     let fromy = this.startday.getFullYear();
@@ -58,13 +66,15 @@ export class CreateElectionPage {
     this.file2_name = this.file2.name;
   }
 
+  
   async submitMultipleForm() {
     let formData = new FormData();
-    
+    this.changeVoteSelect();
     formData.append('electionName',this.electionName);
     formData.append('startDate',this.s_d);
     formData.append('endDate',this.e_d);
     formData.append('summary',this.summary);
+    formData.append('voteselecttype',this.voteselecttype);
     formData.append('excel[]', this.file, this.file.name);
     formData.append('excel[]', this.file2, this.file2.name);
     
