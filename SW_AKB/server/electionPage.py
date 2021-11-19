@@ -2,27 +2,43 @@ import pymysql
 import pandas as pd
 import numpy as np
 import os
+import sys
 
 #이후 입력인자로 받을 예정
+"""
 MID = 1
 e_name = '동국대 패장선거'
 e_startdate = '2021-11-12'
 e_enddate = '2021-12-04'
+"""
+
+#e_state 0:저장완료, 1:
+MID = sys.argv[1]
+e_name = sys.argv[2]
+e_startdate = sys.argv[3]
+e_enddate = sys.argv[4]
+e_content = sys.argv[5]
+e_state = 0
+e_type = int(sys.argv[6])
 
 #파싱단계
-df = pd.read_excel(os.getcwd() + '/유권자명단.xlsx')
+df = pd.read_excel(os.getcwd() + '/uploads/' + sys.argv[7])
 voter_info = df.values.tolist()
 
-df = pd.read_excel(os.getcwd() + '/후보자명단.xlsx')
+df = pd.read_excel(os.getcwd() + '/uploads/' + sys.argv[8])
 candidate_info = df.values.tolist()
 
 #db 연결단계
-db = pymysql.connect(host='localhost', port=3306, user='root', passwd='thdalstn12', db='sfw', charset='utf8')
+#localhost와 연결
+#db = pymysql.connect(host='localhost', port=3306, user='root', passwd='thdalstn12', db='sfw', charset='utf8')
+
+#서버와의 연결
+db = pymysql.connect(host='34.64.179.195', port=3306, user='root', passwd='1234', db='sfw', charset='utf8')
 
 cursor = db.cursor()
 
-election_info = [[MID, e_name, e_startdate, e_enddate, '선거하게 해주세요', '저장완료', len(voter_info), 0]]
-election_sql = "INSERT INTO ELECTION(MID, e_name, e_startdate, e_enddate, e_content, e_state, totalvoternum, presentvoternum) values (%s, %s, %s, %s, %s, %s, %s, %s);"
+election_info = [[MID, e_name, e_startdate, e_enddate, e_content, e_state, len(voter_info), 0, e_type]]
+election_sql = "INSERT INTO ELECTION(MID, e_name, e_startdate, e_enddate, e_content, e_state, totalvoternum, presentvoternum, e_type) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
 cursor.executemany(election_sql, election_info)
 db.commit()
 

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const multer = require("multer");
 //const upload = multer({ dest: "uploads/" });
+
 const upload = multer({
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
@@ -14,6 +15,7 @@ const upload = multer({
         let extension = path.extname(file.originalname);
         let basename = path.basename(file.originalname, extension);
         cb(null, basename + "-" + Date.now() + extension);
+        console.log(Date.now())
       }
     }),
   });
@@ -30,8 +32,17 @@ app.post("/uploads", upload.array("excel[]"), (req, res) => {
   const startDate = req.body.startDate;
   const endDate = req.body.endDate;
   const summary = req.body.summary;
+  const voteselect = req.body.voteselecttype;
+  const voterFileName = req.files[0].filename;
+  const candidateFileName = req.files[1].filename;
   console.log(electionName +' ' + startDate + ' ' + endDate )
   console.log(summary)
+  console.log(voterFileName)
+  console.log(candidateFileName)
+
+
+  const spawn = require('child_process').spawn;
+  const result = spawn('python', ['electionPage.py', 1, electionName, startDate, endDate, summary, voteselect, voterFileName, candidateFileName]);
 });
 
 
