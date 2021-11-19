@@ -1,0 +1,59 @@
+
+<ion-header>
+  <ion-toolbar >
+      <ion-buttons slot="start" >
+          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+        </ion-buttons>
+    <ion-title > <font color="blue"> 명부관리 </font> </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+<ion-content class="menu">
+  <br>
+
+  <ion-item lines="none">      
+      <ion-img src='assets/sw_image/+.png' style='width:50px; height:50px; ' (click)="plus()" ></ion-img>&nbsp;&nbsp;
+     <ion-img src='assets/sw_image/-.png' style='width:50px; height:50px; ' (click)="delete()" ></ion-img>&nbsp;&nbsp;
+     <ion-img src='assets/sw_image/save.png' style='width:50px; height:50px; ' (click)="save()" ></ion-img>
+    </ion-item>
+    <br>
+    <br>
+
+    <br>
+    
+    <center>
+       
+    <table >
+        <tr align ="center">
+            <td><b>이름</b></td>
+            <td><b>전화번호</b></td>
+
+        </tr>
+
+        <tr align ="center">
+            <td>철수</td>
+            <td>010-9999-9999</td>
+        </tr>
+        <tr align ="center">
+            <td>영희</td>
+            <td>010-8888-8888</td>
+        </tr>
+        <tr align ="center">
+            <td>영희</td>
+            <td>010-8888-8888</td>
+        </tr>
+        <tr align ="center">
+            <td>영희</td>
+            <td>010-8888-8888</td>
+        </tr>
+
+        <tr align ="center">
+            <td>영희</td>
+            <td>010-8888-8888</td>
+        </tr>
+        </table>
+    </center>
+
+
+    </ion-content>
+

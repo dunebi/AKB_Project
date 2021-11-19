@@ -35,6 +35,18 @@ const routes: Routes = [
     path: 'userElection',
     loadChildren: () => import('./userElection/userElection.module').then( m => m.UserElectionPageModule)
   },
+  {
+    path: 'manageCandiate',
+    loadChildren: () => import('./manageCandiate/manageCandiate.module').then( m => m.ManageCandiatePageModule)
+  },
+  {
+    path: 'manageVoter',
+    loadChildren: () => import('./manageVoter/manageVoter.module').then( m => m.ManageVoterPageModule)
+  },
+  {
+    path: 'certification/:name/:phonenumber',
+    loadChildren: () => import('./certification/certification.module').then( m => m.CertificationPageModule)
+  },
   
 
   {
