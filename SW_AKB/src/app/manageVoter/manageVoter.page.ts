@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {AlertController} from "@ionic/angular";
+import { NavController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: 'manageVoter.page.html',
@@ -8,11 +11,55 @@ import {AlertController} from "@ionic/angular";
 export class ManageVoterPage {
 
 
-
-  constructor(public atrCtrl: AlertController) {
+  public items:any;
+  private eid : string;
+  constructor(public atrCtrl: AlertController,public navCtrl: NavController,public http: HttpClient) {
+    
+    this.make_json();
+    this.loadData();
+    
 
   }
+
+  async make_json(){
+
+    let formData = new FormData();
+    this.eid='1';
+    formData.append('eid',this.eid);
+    try {
+      const response = await fetch('http://34.64.179.195:3000/manageVoter', {
+        method: 'POST',
+        body: formData,
+      });
   
+  
+  
+      if (!response.ok) {
+        throw new Error(response.statusText);
+        
+      }
+      console.log(response);
+      
+    } catch (err) {
+      console.log(err);
+    }
+
+    
+
+
+   }
+  async loadData(){
+    let data:Observable<any>;
+    data = this.http.get('http://34.64.179.195:3000/voterjson');
+
+    data.subscribe(result =>{
+      this.items = result;
+    }, (error) => {
+
+      window.location.reload();
+    })
+  }
+
   async plus() {
   let alert = this.atrCtrl.create({
     header: '명부추가',

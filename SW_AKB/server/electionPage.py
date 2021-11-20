@@ -33,7 +33,7 @@ candidate_info = df.values.tolist()
 #db = pymysql.connect(host='localhost', port=3306, user='root', passwd='thdalstn12', db='sfw', charset='utf8')
 
 #서버와의 연결
-db = pymysql.connect(host='34.64.179.195', port=3306, user='root', passwd='1234', db='sfw', charset='utf8')
+db = pymysql.connect(host='localhost', port=3306, user='root', passwd='1234', db='sfw', charset='utf8')
 
 cursor = db.cursor()
 

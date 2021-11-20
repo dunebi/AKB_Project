@@ -45,8 +45,30 @@ app.post("/uploads", upload.array("excel[]"), (req, res) => {
   const result = spawn('python', ['electionPage.py', 1, electionName, startDate, endDate, summary, voteselect, voterFileName, candidateFileName]);
 });
 
+app.post("/manageVoter",upload.array(),(req,res) =>{
+
+  const spawn = require('child_process').spawn;
+  console.log(req.body.eid);
+  const result = spawn('python', ['manageVoter.py', req.body.eid]);
+
+  result.stdout.on('data', function(data) { console.log(data.toString()); });
+
+  result.stderr.on('data', function(data) { console.log(data.toString()); });
+  
+});
+
+
+app.get("/voterjson",function(req,res)
+{
+    console.log('arrive')
+    res.sendFile('/home/mimsu1139/server/downloads/voter.json');
+    console.log('complete')
+});
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log("Server running...");
 });
+
+

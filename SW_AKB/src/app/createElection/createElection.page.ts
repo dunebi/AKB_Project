@@ -81,7 +81,7 @@ export class CreateElectionPage {
     
     
     try {
-      const response = await fetch('http://localhost:3000/uploads', {
+      const response = await fetch('http://34.64.179.195:3000/uploads', {
         method: 'POST',
         body: formData,
       });
