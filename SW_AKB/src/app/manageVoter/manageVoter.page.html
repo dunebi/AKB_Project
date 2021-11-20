@@ -19,41 +19,14 @@
     <br>
     <br>
 
-    <br>
     
-    <center>
-       
-    <table >
-        <tr align ="center">
-            <td><b>이름</b></td>
-            <td><b>전화번호</b></td>
 
-        </tr>
+    <ion-list>
+        <ion-item *ngFor="let item of items">
+            <h1>{{item.u_name}}</h1>
+            {{item.u_phonenum}}
+        </ion-item>
 
-        <tr align ="center">
-            <td>철수</td>
-            <td>010-9999-9999</td>
-        </tr>
-        <tr align ="center">
-            <td>영희</td>
-            <td>010-8888-8888</td>
-        </tr>
-        <tr align ="center">
-            <td>영희</td>
-            <td>010-8888-8888</td>
-        </tr>
-        <tr align ="center">
-            <td>영희</td>
-            <td>010-8888-8888</td>
-        </tr>
-
-        <tr align ="center">
-            <td>영희</td>
-            <td>010-8888-8888</td>
-        </tr>
-        </table>
-    </center>
-
-
-    </ion-content>
+    </ion-list>
+</ion-content>
 
