@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import {AlertController} from "@ionic/angular";
-import { NavController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: 'manageVoter.page.html',
@@ -10,57 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class ManageVoterPage {
 
+ public editflag=false;
 
-  public items:any;
-  private eid : string;
-  constructor(public atrCtrl: AlertController,public navCtrl: NavController,public http: HttpClient) {
-    
-    this.make_json();
-    this.loadData();
-    
+  constructor(public atrCtrl: AlertController) {
 
   }
-
-  async make_json(){
-
-    let formData = new FormData();
-    this.eid='1';
-    formData.append('eid',this.eid);
-    try {
-      //localhost 용
-      const response = await fetch('http://34.64.125.190:3000/manageVoter', {
-        method: 'POST',
-        body: formData,
-      });
   
-  
-  
-      if (!response.ok) {
-        throw new Error(response.statusText);
-        
-      }
-      console.log(response);
-      
-    } catch (err) {
-      console.log(err);
-    }
-
-    
-
-
-   }
-  async loadData(){
-    let data:Observable<any>;
-    data = this.http.get('http://34.64.125.190:3000/voterjson');
-
-    data.subscribe(result =>{
-      this.items = result;
-    }, (error) => {
-
-      window.location.reload();
-    })
-  }
-
   async plus() {
   let alert = this.atrCtrl.create({
     header: '명부추가',
@@ -95,5 +47,40 @@ export class ManageVoterPage {
     ]
   });
   (await alert).present();
+}
+async delete() {
+    const al = await this.atrCtrl.create({
+      header:'확인!',
+      message: '유권자를 정말로 삭제하시겠습니까?',
+      buttons:[
+        {
+          text:'Cancel',
+          role:'cancel',
+          cssClass:'secondary',
+          handler:(blah)=>{
+            console.log("삭제 취소");
+          }
+        },
+        {
+          text:'Okay',
+          handler:()=>{
+            //console.log('게시물 삭제');
+          //  this.db.object(`board/${this.postkey}`).set(null);
+          //  this.alertDeletepost();
+          }
+        }
+      ]
+    });
+    await al.present();
+  }
+
+edit() {
+  if(this.editflag==true)
+  {
+    this.editflag=false;
+  }
+  else{
+    this.editflag=true;
+  }
 }
 }
