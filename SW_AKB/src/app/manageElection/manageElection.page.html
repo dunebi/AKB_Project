@@ -1,8 +1,44 @@
 <ion-header>
-  <ion-toolbar color ="warning">
+  <ion-toolbar color ="">
       <ion-buttons slot="start">
-          <ion-back-button text="" defaultHref="/tabs/tab2"></ion-back-button>
+          <ion-back-button text="" color="primary" defaultHref="/tabs/tab2"></ion-back-button>
         </ion-buttons>
-    <ion-title>category112211</ion-title>
+        <ion-title><font color="blue"><b>선거관리</b></font></ion-title>
   </ion-toolbar>
 </ion-header>
+
+  
+
+
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        Bar Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Doughnut Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+      </ion-card-content>
+    </ion-card>
+ 
+    <ion-card>
+      <ion-card-header>
+        Line Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #lineCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+  
