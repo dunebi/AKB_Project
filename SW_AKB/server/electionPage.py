@@ -1,7 +1,6 @@
 import pymysql
 import pandas as pd
 import numpy as np
-import os
 import sys
 
 #이후 입력인자로 받을 예정
@@ -19,13 +18,13 @@ e_startdate = sys.argv[3]
 e_enddate = sys.argv[4]
 e_content = sys.argv[5]
 e_state = 0
-e_type = int(sys.argv[6])
+#e_type = int(sys.argv[6])
 
 #파싱단계
-df = pd.read_excel(os.getcwd() + '/uploads/' + sys.argv[7])
+df = pd.read_excel('../server/uploads/' + sys.argv[6])
 voter_info = df.values.tolist()
 
-df = pd.read_excel(os.getcwd() + '/uploads/' + sys.argv[8])
+df = pd.read_excel('../server/uploads/' + sys.argv[7])
 candidate_info = df.values.tolist()
 
 #db 연결단계
@@ -37,8 +36,8 @@ db = pymysql.connect(host='localhost', port=3306, user='root', passwd='1234', db
 
 cursor = db.cursor()
 
-election_info = [[MID, e_name, e_startdate, e_enddate, e_content, e_state, len(voter_info), 0, e_type]]
-election_sql = "INSERT INTO ELECTION(MID, e_name, e_startdate, e_enddate, e_content, e_state, totalvoternum, presentvoternum, e_type) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+election_info = [[MID, e_name, e_startdate, e_enddate, e_content, e_state, len(voter_info), 0]]
+election_sql = "INSERT INTO ELECTION(MID, e_name, e_startdate, e_enddate, e_content, e_state, totalvoternum, presentvoternum) values (%s, %s, %s, %s, %s, %s, %s, %s);"
 cursor.executemany(election_sql, election_info)
 db.commit()
 
