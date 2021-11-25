@@ -7,26 +7,82 @@
     <ion-title > <font color="blue"> 명부관리 </font> </ion-title>
   
   </ion-toolbar>
+  <ion-row justify-content-center align-items-start >
+    <ion-searchbar [(ngModel)]="searchinput" placeholder="유권자를 검색해보세요"></ion-searchbar>
+  </ion-row>
 </ion-header>
 <ion-content class="menu">
   <br>
 
-  <ion-item lines="none">      
-      <ion-img src='assets/sw_image/+.png' style='width:50px; height:50px; ' (click)="plus()" ></ion-img>&nbsp;&nbsp;
-     <ion-img src='assets/sw_image/-.png' style='width:50px; height:50px; ' (click)="delete()" ></ion-img>&nbsp;&nbsp;
-     <ion-img src='assets/sw_image/save.png' style='width:50px; height:50px; ' (click)="save()" ></ion-img>
+  <ion-item lines="none" class="nav"  >      
+      <ion-img src='assets/sw_image/+.png' style='width:50px; height:50px; ' *ngIf ="editflag" (click)="plus()" ></ion-img>&nbsp;&nbsp;
+     <ion-img src='assets/sw_image/save.png' style='width:50px; height:50px; ' *ngIf ="editflag" (click)="save()" ></ion-img>&nbsp;&nbsp;
+     <ion-img src='assets/sw_image/edit.png' style='width:50px; height:50px; ' (click)="edit()" ></ion-img>
     </ion-item>
+
     <br>
     <br>
 
-    
+    <br>
+    <ion-card >
+     <ion-item>
+          <table class="product_tabel" >
+         
+            <tr>
+                <td rowspan="2"  >
+                  <ion-avatar>
+                    <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
+                  </ion-avatar>
+                </td>
+                <td>
+                    <br>
+                  김철수
+                </td>
+            </tr>
+            <tr> 
+              <td>
+               <h6> 010-1111-1111</h6>  
+              </td> 
+        
+            </tr>
+         
+          </table>
+     
+          <ion-icon slot ="end" (click)="delete()" *ngIf ="editflag" name="remove-circle-outline" color="danger" size="large" ></ion-icon>
 
-    <ion-list>
-        <ion-item *ngFor="let item of items">
-            <h1>{{item.u_name}}</h1>
-            {{item.u_phonenum}}
         </ion-item>
+      </ion-card>
+      <ion-card >
+        <ion-item>
+             <table class="product_tabel" >
+            
+               <tr>
+                   <td rowspan="2"  >
+                     <ion-avatar>
+                       <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
+                     </ion-avatar>
+                   </td>
+                   <td>
+                       <br>
+                     김철수
+                   </td>
+               </tr>
+               <tr> 
+                 <td>
+                  <h6> 010-1111-1111</h6>  
+                 </td> 
+           
+               </tr>
+            
+             </table>
+        
+             <ion-icon slot ="end" *ngIf ="editflag" name="remove-circle-outline" color="danger" size="large" ></ion-icon>
+   
+           </ion-item>
+         </ion-card>
 
-    </ion-list>
-</ion-content>
+   
+              
+
+    </ion-content>
 

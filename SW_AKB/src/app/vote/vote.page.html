@@ -10,7 +10,38 @@
 
   <ion-content class="menu">
 
-    
+
+      <ion-radio-group value="vote">
+      <br> 
+        <ion-item lines="none">
+          <ion-avatar>
+            <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
+          </ion-avatar>
+          <ion-label>&nbsp;1 철수</ion-label>
+          <ion-radio slot="start" color="success" value="candiate1"></ion-radio>
+        </ion-item>
+          <br>
+        <ion-item>
+          <ion-avatar>
+            <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
+          </ion-avatar>
+          <ion-label>&nbsp;2 영희</ion-label>
+          <ion-radio slot="start" color="tertiary" value="candiate2"></ion-radio>
+        </ion-item>
+             <br>
+        <ion-item>
+          <ion-avatar>
+            <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
+          </ion-avatar>
+          <ion-label>&nbsp;3 민수</ion-label>
+          <ion-radio slot="start" color="danger" value="candiate3"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <br>
+      <br>
+      <ion-button  color="" expand="block" (click)="sign()">투표하기</ion-button>
+     
+
      
     </ion-content>
 
