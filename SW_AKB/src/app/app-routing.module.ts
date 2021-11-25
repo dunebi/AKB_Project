@@ -47,8 +47,28 @@ const routes: Routes = [
     path: 'certification/:name/:phonenumber',
     loadChildren: () => import('./certification/certification.module').then( m => m.CertificationPageModule)
   },
+  {
+    path: 'sign',
+    loadChildren: () => import('./sign/sign.module').then( m => m.SignPageModule)
+  },
+  {
+    path: 'vote',
+    loadChildren: () => import('./vote/vote.module').then( m => m.VotePageModule)
+  },
+  {
+    path: 'showCandiate',
+    loadChildren: () => import('./showCandiate/showCandiate.module').then( m => m.ShowCandiatePageModule)
+  },
+  {
+    path: 'sysmanagemain',
+    loadChildren: () => import('./sysmanagemain/sysmanagemain.module').then( m => m.SysManagemainPageModule)
+  },
   
-
+  {
+    path: 'sysmanageElection',
+    loadChildren: () => import('./sysmanageElection/sysmanageElection.module').then( m => m.SysManageElectionPageModule)
+  },
+  
   {
     path: '',
     redirectTo: 'home',
