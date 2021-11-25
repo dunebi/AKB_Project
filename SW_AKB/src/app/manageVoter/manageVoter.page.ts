@@ -27,7 +27,8 @@ export class ManageVoterPage {
     this.eid='1';
     formData.append('eid',this.eid);
     try {
-      const response = await fetch('http://34.64.179.195:3000/manageVoter', {
+      //localhost 용
+      const response = await fetch('http://34.64.125.190:3000/manageVoter', {
         method: 'POST',
         body: formData,
       });
@@ -50,7 +51,7 @@ export class ManageVoterPage {
    }
   async loadData(){
     let data:Observable<any>;
-    data = this.http.get('http://34.64.179.195:3000/voterjson');
+    data = this.http.get('http://34.64.125.190:3000/voterjson');
 
     data.subscribe(result =>{
       this.items = result;

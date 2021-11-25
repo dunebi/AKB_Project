@@ -52,21 +52,7 @@
        <font id="fontweight" style="color:#808080">{{file2_name}}</font>
       <label class="myFakeUploadButton" for="myFileInput"><ion-img src='assets\sw_image\folder.png' style='width:50px;height:50px'></ion-img></label>
       <input type="file" id="myFileInput" (change)="onFile2Change($event)" />
-
-
-    
-      
     </ion-item >
-  
-    <br>
-    <h6><b>선거선택</b></h6>
-    <ion-item>
-          <ion-select  placeholder="투표방식을 선택하세요 " [(ngModel)]="voteselect">
-            <ion-select-option value="찬반투표">찬반투표 </ion-select-option>
-            <ion-select-option value="보통선거">보통선거</ion-select-option>
-          </ion-select>
-
-    </ion-item>
     <br>
     <h6><b>선거개요</b></h6>
   

@@ -22,6 +22,7 @@ export class CreateElectionPage {
   private file1_name : String ="유권자 명단.xlsx"
   private file2_name : String="후보자 명단.xlsx"
   
+  private mid: string;
   private electionName: string='';
   private s_d: string; 
   private e_d: string; 
@@ -69,19 +70,22 @@ export class CreateElectionPage {
   
   async submitMultipleForm() {
     let formData = new FormData();
+    this.mid='1'; //이후 로그인 상황에서 해당 값을 불러와야됨
     this.changeVoteSelect();
+    formData.append('mid',this.mid);
     formData.append('electionName',this.electionName);
     formData.append('startDate',this.s_d);
     formData.append('endDate',this.e_d);
     formData.append('summary',this.summary);
-    formData.append('voteselecttype',this.voteselecttype);
+    //formData.append('voteselecttype',this.voteselecttype);
     formData.append('excel[]', this.file, this.file.name);
     formData.append('excel[]', this.file2, this.file2.name);
     
     
     
     try {
-      const response = await fetch('http://34.64.179.195:3000/uploads', {
+      //server 용
+      const response = await fetch('http://34.64.125.190:3000/uploads', {
         method: 'POST',
         body: formData,
       });
