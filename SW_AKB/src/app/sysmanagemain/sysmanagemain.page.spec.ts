@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ManagemainPage } from './managemain.page';
+import { SysManagemainPage } from './sysmanagemain.page';
 
-describe('ManagemainPage', () => {
-  let component: ManagemainPage;
-  let fixture: ComponentFixture<ManagemainPage>;
+describe('SysManagemainPage', () => {
+  let component: SysManagemainPage;
+  let fixture: ComponentFixture<SysManagemainPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagemainPage ],
+      declarations: [ SysManagemainPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ManagemainPage);
+    fixture = TestBed.createComponent(SysManagemainPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

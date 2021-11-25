@@ -6,10 +6,20 @@
        <font style="color: blue;">로그아웃</font> 
       </ion-button>
     </ion-buttons>
-      <ion-title><font color="blue"><b>선거목록</b></font></ion-title>
+      <ion-title><font color="blue"><b>시스템관리자메뉴</b></font></ion-title>
  
     </ion-toolbar>
-
+  <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)" >
+      <ion-segment-button value="전체">
+      <ion-label>전체</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="승인">
+          <ion-label>승인</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="미승인">
+            <ion-label>미승인</ion-label>
+            </ion-segment-button>
+    </ion-segment>
 </ion-header>
 <ion-content >
   <ion-card>
@@ -73,6 +83,4 @@
 
 
 
-
- 
 </ion-content>
