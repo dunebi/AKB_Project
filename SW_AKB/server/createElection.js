@@ -4,6 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const multer = require("multer");
+let uid = "";
+global.uid = uid;
 //const upload = multer({ dest: "uploads/" });
 
 const upload = multer({
@@ -58,6 +60,37 @@ app.post("/manageVoter",upload.array(),(req,res) =>{
   
 });
 
+app.post("/userlogin",upload.array(),(req,res) =>{
+
+  const spawn = require('child_process').spawn;
+  console.log(req.body.realnumber);
+  console.log(req.body.name);
+  const result = spawn('python', ['/root/swe/python/userLogin.py', req.body.name,req.body.realnumber]);
+
+  result.stdout.on('data', function(data) { 
+    console.log(data.toString());
+    global.uid = data.toString(); });
+  console.log(global.uid);
+  result.on('close', (code) => {
+    res.end();
+  });
+  
+
+
+  
+});
+
+app.get("/userloginget",function(req,res)
+{
+    console.log('arrive')
+
+    //server 용
+    //res.sendFile('/root/swe/server/downloads/userlogin.json');
+    res.send(global.uid)
+    //localhost 용 : json이 생성되는 파일의 절대경로설정
+    //res.sendFile('C:/Users/songm/AKB_Project/SW_AKB/server/downloads/voter.json')
+    console.log('complete')
+});
 
 app.get("/voterjson",function(req,res)
 {
@@ -71,7 +104,7 @@ app.get("/voterjson",function(req,res)
     console.log('complete')
 });
 
-app.post("/managemain",function(req,res)
+app.post("/managemain",upload.array(),function(req,res)
 {
     //console.log("good")
     const spawn = require('child_process').spawn;

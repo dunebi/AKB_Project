@@ -2,17 +2,23 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 import { getAuth, RecaptchaVerifier,signInWithPhoneNumber } from "firebase/auth";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 let _this;
+
 @Component({
   selector: 'app-home',
   templateUrl: 'userlogin.page.html',
   styleUrls: ['userlogin.page.scss'],
 })
 export class UserloginPage {
-  public name: string="";
-  public phonenumber: string=""; 
+  public name: string="박민수";
+  public phonenumber: string="01026175365";
+  public realnumber: string="+8201012341234";
+  public uid: string="";
+  public item: any;
   auth = getAuth();
   recaptchaVerifier:RecaptchaVerifier;
  
@@ -24,15 +30,18 @@ export class UserloginPage {
    public ac:ActivatedRoute,
    public router: Router,
    public navCtrl: NavController,
+   public http: HttpClient
    
  
  ) {_this=this;}
  
 
  ngOnInit() {
-  this.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {}, this.auth);
+  this.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {'size': 'normal'}, this.auth);
+  _this.verify_user()
  }
 
+ 
 
  
 
@@ -59,9 +68,62 @@ export class UserloginPage {
    }
  }
 
+ async verify_user(){
+  
+  let formData = new FormData();
+ 
+  formData.append('name',this.name);
+  formData.append('realnumber',this.phonenumber);
+  try {
+    const response = await fetch('http://34.64.125.190:3000/userlogin', {
+      method: 'POST',
+      body: formData,
+    });
+
+
+
+   
+    
+    
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+      
+    }
+    console.log(response);
+
+    let data:Observable<any>;
+    data = await this.http.get('http://34.64.125.190:3000/userloginget');
+    console.log(data)
+    data.subscribe(result =>{
+    this.item = result;
+    //this.uid = this.item[0].UID;
+    //console.log(this.uid);
+    console.log(this.item);
+  }, (error) => {
+
+    
+  })
+    
+  } catch (err) {
+    console.log(err);
+  }
+
+  
+  
+
+ }
+ 
+
+ 
+
+
+
 async createSMSphone(){
-  this.phonenumber='+82'+this.phonenumber;
+  this.realnumber='+82'+this.phonenumber;
 }
+
+
 
  async sendPhone(){
     
@@ -69,7 +131,7 @@ async createSMSphone(){
   
   var applicationVerifier = this.recaptchaVerifier;
   this.createSMSphone();
-  const res = signInWithPhoneNumber(this.auth,this.phonenumber, applicationVerifier)
+  const res = signInWithPhoneNumber(this.auth,this.realnumber, applicationVerifier)
   .then( async (confirmationResult) => {
     console.log('confirm ' + confirmationResult);
     let prompt = await this.alertCtrl.create({
@@ -89,14 +151,19 @@ async createSMSphone(){
               message: '인증에 성공했습니다',
               buttons: [{
                 text: '확인',
-                role: 'cancel'
+                role: 'cancel',
+                handler: () => {
+                  
+                  _this.verify_user()
+                
+                
+                }
               }]
             }).then(alertEl => {
               alertEl.present();
             });
           
-           
-
+        
           })
           .catch(function (error) {
            
@@ -110,7 +177,7 @@ async createSMSphone(){
               }]
             }).then(alertEl => {
               alertEl.present();
-              window.location.reload();
+              //window.location.reload();
             });
   
 
@@ -127,6 +194,7 @@ async createSMSphone(){
   console.error("SMS not sent by ", error);
   
 })
+
 }
 
 
