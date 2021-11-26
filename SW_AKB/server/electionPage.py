@@ -21,10 +21,10 @@ e_state = 0
 #e_type = int(sys.argv[6])
 
 #파싱단계
-df = pd.read_excel('../server/uploads/' + sys.argv[6])
+df = pd.read_excel('/root/swe/server/uploads/' + sys.argv[6])
 voter_info = df.values.tolist()
 
-df = pd.read_excel('../server/uploads/' + sys.argv[7])
+df = pd.read_excel('/root/swe/server/uploads/' + sys.argv[7])
 candidate_info = df.values.tolist()
 
 #db 연결단계
