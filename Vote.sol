@@ -33,6 +33,16 @@ contract Vote {
         cnt = candidates[candidate_num].voteCount;
     }
     
+    // 현재 투표자수 반환
+    function getFinishVoterCount() public view returns (uint) {
+        return finishVoteCnt;
+    }
+
+    // 전체 유권자수 반환
+    function getMaxVoter() public view returns (uint) {
+        return maxVoter;
+    }
+
     // 투표하기
     function vote(uint candidate_num) external {
         require(msg.sender == chairperson, "Has no right to record vote");
