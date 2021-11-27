@@ -80,10 +80,10 @@
 
           </ion-item>
           <ion-item>
-              <ion-button color="danger">삭제</ion-button>
+              <ion-button color="danger" (click)="deletefunc(item)">삭제</ion-button>
               <ion-button color="secondary">수정</ion-button>
-              <ion-button color="tertiary">승인신청</ion-button>
-              <ion-button color="success">선거보기</ion-button>
+              <ion-button color="tertiary" (click)="apply()">승인신청</ion-button>
+              <ion-button color="success"  (click)="getElection(item)">선거보기</ion-button>
           </ion-item>
       </ion-card>
       </div>
@@ -91,3 +91,6 @@
 
    
 </ion-content>
+<div class="sbutton">
+    <ion-button  color="" expand="block" (click)="createElection()">선거개설하기</ion-button>
+</div>

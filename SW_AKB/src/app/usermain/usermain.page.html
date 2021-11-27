@@ -12,67 +12,29 @@
 
 </ion-header>
 <ion-content >
-  <ion-card>
-    <ion-item lines="none" >
-      <table class="product_tabel" >
-        <tr>
-            <td rowspan="2" width="20vh;" >
-              <ion-avatar>
-                <ion-img src='assets/sw_image/manual-voting.png' style='width:100%;height:100%'></ion-img>
-              </ion-avatar>
-            </td>
-            <td>
-            선거 제목
-            </td>
-        </tr>
-        <tr> 
-          <td>
-           <h6> 선거 기간</h6>  
-          </td> 
-        
-    
-        </tr>
-      </table>
-      <ion-icon slot ="end" name="heart" size="large" class="fullheart" ></ion-icon>
-</ion-item>
+  <ion-list *ngFor="let item of items; let i=index;">
+    <ion-card>
+      <ion-item lines="none">
+        <table class="product_tabel">
+            <tr>
+                <td rowspan="2" width="20vh;">
+                    <ion-avatar>
+                        <ion-img src='assets/sw_image/manual-voting.png' style='width:100%;height:100%'></ion-img>
+                    </ion-avatar>
+                </td>
+                <td>
+                    {{item.e_name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6>{{item.e_date}}</h6>
+                </td>
+
+            </tr>
+        </table>
+        <ion-icon slot="end" name="heart" size="large" class="fullheart"></ion-icon>
+    </ion-item>
   </ion-card>
-  <ion-card>
-    <ion-item  >
-      <table class="product_tabel" >
-        <tr>
-            <td rowspan="2" width="20vh;" >
-              <ion-avatar>
-                <ion-img src='assets/sw_image/manual-voting.png' style='width:100%;height:100%'></ion-img>
-              </ion-avatar>
-            </td>
-            <td>
-            선거 제목
-            </td>
-        </tr>
-        <tr> 
-          <td>
-           <h6> 선거 기간</h6>  
-          </td> 
-        
-    
-        </tr>
-      </table>
-      <ion-icon slot ="end" name="heart" size="large" class="fullheart" ></ion-icon>
-</ion-item>
-<ion-item>
-  <ion-button color="danger">삭제</ion-button>
-  <ion-button color="secondary">수정</ion-button>
-  <ion-button color="tertiary">승인신청</ion-button>
-  <ion-button color="success">선거보기</ion-button>
-</ion-item>
-  </ion-card>
-
-  <ion-card>
-    
-  </ion-card>
-
-
-
-
- 
+</ion-list>
 </ion-content>
