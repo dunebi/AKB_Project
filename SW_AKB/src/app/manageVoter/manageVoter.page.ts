@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {AlertController} from "@ionic/angular";
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'manageVoter.page.html',
@@ -7,24 +10,99 @@ import {AlertController} from "@ionic/angular";
 })
 export class ManageVoterPage {
 
+ public eid: string;
  public editflag=false;
+ public items: any;
+ public items_length: number;
+ public insert = [];
+ public remove = [];
+ public searchinput:string="";
 
-  constructor(public atrCtrl: AlertController) {
+
+  constructor(public atrCtrl: AlertController,public http: HttpClient) {
+    this.make_json();
+   
+  }
+
+
+
+  async modify_database(){
+
+
+    let formData = new FormData();
+    
+    formData.append('insert',JSON.stringify(this.insert));
+    
+    
+    
+    formData.append('remove',JSON.stringify(this.remove));
+    
+      const response = await fetch('http://34.64.125.190:3000/modifyVoter', {
+        method: 'POST',
+        body: formData,
+      });
+   
+
+
 
   }
+
+
+
+  async make_json(){
+
+    let formData = new FormData();
+    this.eid='1';
+    formData.append('eid',this.eid);
+    try {
+      const response = await fetch('http://34.64.125.190:3000/manageVoter', {
+        method: 'POST',
+        body: formData,
+      });
+  
+  
+      let data:Observable<any>;
+      data = await this.http.get('http://34.64.125.190:3000/voterjson');
+  
+      data.subscribe(result =>{
+        this.items = result;
+        this.items_length = this.items.length - 1
+      
+        
+        console.log(this.items)
+      
+      }, (error) => {
+  
+      
+      })
+      if (!response.ok) {
+        throw new Error(response.statusText);
+        
+      }
+      console.log(response);
+      
+    } catch (err) {
+      console.log(err);
+    }
+
+    
+
+
+   }
+ 
   
   async plus() {
   let alert = this.atrCtrl.create({
     header: '명부추가',
     inputs: [
       {
-        name: '이름',
+        name: 'name',
         placeholder: '유권자 이름'
         
       },
       {
-        name: '전화번호',
-        placeholder: '유권자 전화번호',
+        name: 'phone',
+        placeholder: '010-xxxx-xxxx',
         
       }
     ],
@@ -32,15 +110,18 @@ export class ManageVoterPage {
       {
         text: '취소',
         role: 'cancel',
-        handler: data => {
-          console.log('You Clicked on Cancel');
-        }
+        handler:()=> {this.modify_database();}
       },
       {
         text: '명부추가',
         role: '',
         handler: data => {
-          console.log('명부를 추가합니다');
+
+          this.items.push({'uid' : 0, 'u_name' : data.name, 'u_phonenum' : data.phone})
+          
+          this.insert.push({'u_name':data.name, 'u_phonenum' : data.phone})
+          console.log(this.insert)
+          
         }
         
       }
@@ -48,7 +129,7 @@ export class ManageVoterPage {
   });
   (await alert).present();
 }
-async delete() {
+async delete(event) {
     const al = await this.atrCtrl.create({
       header:'확인!',
       message: '유권자를 정말로 삭제하시겠습니까?',
@@ -56,17 +137,33 @@ async delete() {
         {
           text:'Cancel',
           role:'cancel',
-          cssClass:'secondary',
-          handler:(blah)=>{
-            console.log("삭제 취소");
-          }
+          
         },
         {
-          text:'Okay',
-          handler:()=>{
-            //console.log('게시물 삭제');
-          //  this.db.object(`board/${this.postkey}`).set(null);
-          //  this.alertDeletepost();
+          text:'OK',
+          role:'',
+          handler:()=>{         
+
+            if (this.items[event.target.id].uid!=0)
+              this.remove.push(this.items[event.target.id].uid)
+            else //직접 추가했던거라면
+            {
+              let removename = this.items[event.target.id].u_name;  
+              let removephonenum =  this.items[event.target.id].removephonenum;    
+              for (let i =0; i<this.insert.length;i++)
+              {
+                if (this.insert[i].u_name == removename)
+                  this.insert.splice(i,1);
+              }      
+              
+            }
+          
+            
+            this.items.splice(event.target.id,1);
+          
+            
+            
+
           }
         }
       ]
