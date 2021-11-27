@@ -1,0 +1,1 @@
+geth --nodiscover --identity "VoteNetwork" --datadir ./ --http --http.addr "0.0.0.0" --http.port 8545 --http.corsdomain "*" --networkid 2400 --http.api "admin,eth,net,web3,debug,miner,txpool,personal" --ws --ws.addr "0.0.0.0" --ws.port 8546 --ws.api "admin,eth,net,web3,debug,miner,txpool,personal" --allow-insecure-unlock console

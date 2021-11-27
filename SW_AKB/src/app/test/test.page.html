@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar >
+      <ion-buttons slot="start" >
+          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+        </ion-buttons>
+    <ion-title > <font color="blue"> 투표하기 </font> </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content class="menu">
+
+
+      <ion-radio-group [(ngModel)]="candidatenum" (ionChange)="voteChange($event)">
+      <br> 
+        <ion-item lines="none">
+          <ion-avatar>
+         
+          </ion-avatar>
+          <ion-label>&nbsp;1 철수</ion-label>
+          <ion-radio slot="start" color="success" value="1"></ion-radio>
+        </ion-item>
+          <br>
+        <ion-item>
+          <ion-avatar>
+            
+          </ion-avatar>
+          <ion-label>&nbsp;2 영희</ion-label>
+          <ion-radio slot="start" color="tertiary" value="2"></ion-radio>
+        </ion-item>
+             <br>
+        <ion-item>
+          <ion-avatar>
+          
+          </ion-avatar>
+          <ion-label>&nbsp;3 민수</ion-label>
+          <ion-radio slot="start" color="danger" value="3"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <br>
+      <br>
+      <ion-button  color="" expand="block" (click)="voteCall()">투표하기</ion-button>
+      <br> <br>
+      <ion-button  color="" expand="block" (click)="getVoteCountCall()">득표수확인</ion-button>
+
+      <ion-button  color="" expand="block" (click)="processing()">계약배포(승인)</ion-button>
+     
+
+     
+    </ion-content>
+
+    
+ 
+ 
+  
+
+  

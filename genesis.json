@@ -1,0 +1,21 @@
+{
+    "config": {
+    "chainId": 2400,
+    "homesteadBlock": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "eip150Block": 0,
+    "eip155Block": 0,
+    "eip158Block": 0
+    },
+    "difficulty": "0x00000",
+    "gasLimit": "0x8000000",
+    "alloc": {
+        "0x09Ee4Ba15E73eb81296A3e5874bFeF1bAfdC2601": { "balance": "100000000000000000000"}
+    },
+    "extraData": "",
+    "nonce": "0x0000000000000000",
+    "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "timestamp": "0x00"
+}

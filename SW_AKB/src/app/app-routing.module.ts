@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-  
+
   {
     path: 'userlogin',
     loadChildren: () => import('./userlogin/userlogin.module').then( m => m.UserloginPageModule)
@@ -71,13 +72,24 @@ const routes: Routes = [
   
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'test',
     pathMatch: 'full'
   },
+  {
+    path: 'test',
+    loadChildren: () => import('./test/test.module').then( m => m.TestPageModule)
+  },
+  {
+    path: 'showresult',
+    loadChildren: () => import('./showresult/showresult.module').then( m => m.ShowresultPageModule)
+  },
+
+
 ];
 
 @NgModule({
   imports: [
+    HttpClientModule,
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
