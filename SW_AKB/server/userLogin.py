@@ -26,7 +26,7 @@ if len(result) > 0:
      print(result[0][0])
 else:
     #temp = [{'UID':'NULL'}]
-    print('NULL')
+    print(0)
 
 
 

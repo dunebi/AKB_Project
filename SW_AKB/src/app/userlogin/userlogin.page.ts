@@ -14,11 +14,11 @@ let _this;
   styleUrls: ['userlogin.page.scss'],
 })
 export class UserloginPage {
-  public name: string="박민수";
-  public phonenumber: string="01026175365";
-  public realnumber: string="+8201012341234";
-  public uid: string="";
-  public item: any;
+  public name: string="";
+  public phonenumber: string="";
+  public realnumber: string="";
+ 
+  public uid: any;
   auth = getAuth();
   recaptchaVerifier:RecaptchaVerifier;
  
@@ -38,35 +38,10 @@ export class UserloginPage {
 
  ngOnInit() {
   this.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {'size': 'normal'}, this.auth);
-  _this.verify_user()
+  
  }
 
  
-
- 
-
- 
- CertificationNumber(n,p){
-
-   if(this.name==""||this.phonenumber==""){
-     this.alertCtrl.create({
-       header:'',
-       message: '내용을 모두 입력해주세요',
-       buttons:[{
-         text:'확인',
-         role: 'cancel'
-       }]
-     }).then(alertEI=>{
-       alertEI.present();
-     });
-    
-   }
-   else{
-   n=this.name
-   p=this.phonenumber
-   this.router.navigate(['certification',n,p]);
-   }
- }
 
  async verify_user(){
   
@@ -96,13 +71,38 @@ export class UserloginPage {
     data = await this.http.get('http://34.64.125.190:3000/userloginget');
     console.log(data)
     data.subscribe(result =>{
-    this.item = result;
-    //this.uid = this.item[0].UID;
-    //console.log(this.uid);
-    console.log(this.item);
+    this.uid = result;
+    console.log(this.uid)
+    if (this.uid == 0)
+    {
+
+      console.log('Error');
+      return _this.alertCtrl.create({
+        header: '',
+        message: '투표 가능한 선거가 존재하지 않습니다.',
+        buttons: [{
+          text: '확인',
+          role: 'cancel',
+          handler: () => {
+            
+            window.location.reload();
+          
+          
+          }
+        }]
+      }).then(alertEl => {
+        alertEl.present();
+      });
+    }
+    else{
+      console.log(this.uid);
+      console.log(typeof(this.uid))
+      this.router.navigate(['usermain',this.uid]);
+
+    }
   }, (error) => {
 
-    
+    console.log(error)
   })
     
   } catch (err) {

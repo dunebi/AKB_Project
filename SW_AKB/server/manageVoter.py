@@ -13,7 +13,7 @@ db = pymysql.connect(host='localhost', port=3306, user='root', passwd='1234', db
 
 cursor = db.cursor()
 
-sql = "select u.u_name, u.u_phonenum from USER u left join USER_ELECTION ue on u.UID=ue.UID where ue.EID=" + sys.argv[1] + ";"
+sql = "select u.uid, u.u_name, u.u_phonenum from USER u left join USER_ELECTION ue on u.UID=ue.UID where ue.EID=" + sys.argv[1] + ";"
 cursor.execute(sql)
 #print(cursor.fetchall())
 result = cursor.fetchall()
@@ -21,7 +21,7 @@ db.close()
 
 voter = []
 for i in range(len(result)):
-    temp = {'u_name':result[i][0], 'u_phonenum':result[i][1]}
+    temp = {'uid':result[i][0],'u_name':result[i][1], 'u_phonenum':result[i][2]}
     if i == len(result)-1:
         voter.append(temp)
     else:
