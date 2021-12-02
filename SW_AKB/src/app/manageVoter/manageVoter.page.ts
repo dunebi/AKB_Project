@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController} from "@ionic/angular";
 import { Observable } from 'rxjs';
+import {Router, ActivatedRoute} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Location } from "@angular/common";
 @Component({
@@ -19,8 +20,10 @@ export class ManageVoterPage {
  public searchinput:string="";
 
 
-  constructor(private location: Location, public atrCtrl: AlertController,public http: HttpClient) {
+  constructor(private location: Location, public atrCtrl: AlertController,public http: HttpClient, private ac:ActivatedRoute) {
+    
     this.make_json();
+    
    
   }
 
@@ -53,9 +56,8 @@ export class ManageVoterPage {
 
 
   async make_json(){
-
+    this.eid = this.ac.snapshot.paramMap.get('eid');
     let formData = new FormData();
-    this.eid='3';
     formData.append('eid',this.eid);
     try {
       const response = await fetch('http://34.64.125.190:3000/manageVoter', {

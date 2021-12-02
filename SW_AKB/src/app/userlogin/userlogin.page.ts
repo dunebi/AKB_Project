@@ -199,6 +199,8 @@ async createSMSphone(){
 }
 
 myBackButton(){
-  this.location.back();
+  this
+  .router
+  .navigate(['home']);
 }
 }

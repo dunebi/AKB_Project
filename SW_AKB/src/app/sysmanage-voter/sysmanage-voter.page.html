@@ -2,9 +2,9 @@
 <ion-header>
   <ion-toolbar >
       <ion-buttons slot="start" >
-          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+          <ion-back-button  color="primary" (click)="myBackButton()" defaultHref="/tabs/tab2"></ion-back-button>
         </ion-buttons>
-    <ion-title > <font color="blue"> 명부관리 </font> </ion-title>
+    <ion-title > <font color="#3B7AE1"> 명부확인 </font> </ion-title>
   
   </ion-toolbar>
   <ion-row justify-content-center align-items-start >
@@ -12,10 +12,7 @@
   </ion-row>
 </ion-header>
 <ion-content class="menu">
-  <br>
-    <br>
-    <br>
-    <br>
+  
     <ion-card *ngFor="let item of items" id={{items.indexOf(item)}} >
      <ion-item>
           <table class="product_tabel" >

@@ -3,7 +3,7 @@
       <ion-buttons slot="start" >
           <ion-back-button  color="primary" defaultHref="tab2" (click)='myBackButton()'></ion-back-button>
         </ion-buttons>
-    <ion-title > <font color="blue"> 투표하기 </font> </ion-title>
+    <ion-title > <font color="#3B7AE1"> 투표하기 </font> </ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -13,27 +13,23 @@
 
       <ion-radio-group  [(ngModel)]="candidatenum" (ionChange)="voteChange($event)">
       <br> 
-        <ion-item lines="none"  *ngFor="let item of items" id={{items.indexOf(item)}}>
+      <div *ngFor="let item of items" id={{items.indexOf(item)}}>
+        <ion-item lines="none"  >
           <ion-avatar>
-            <!--<ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>-->
+            <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
           </ion-avatar>
-          <ion-label>&nbsp;{{item.c_name}}</ion-label>
+          <ion-label>&nbsp;{{item.c_num}}&nbsp;&nbsp;&nbsp;{{item.c_name}}</ion-label>
           <ion-radio slot="start" color="success" value="{{item.c_num}}"></ion-radio>
-         
-        </ion-item>
-          <br>
         
+        </ion-item>
+        <br>
+        </div>
       </ion-radio-group>
-      <br>
-      <br>
-      <ion-button  color="" expand="block" (click)="voteCall()">투표하기</ion-button>
       
-      <br> <br>
-      <ion-button  color="" expand="block" (click)="getVoteCountCall()">결과집계</ion-button>
-     
     </ion-content>
-
-    
+    <div class="sbutton">
+    <ion-button  color="" expand="block" (click)="voteCall()">투표하기</ion-button>
+  </div>
  
  
   

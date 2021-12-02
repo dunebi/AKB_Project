@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>sysmanageCandidate</ion-title>
+  <ion-toolbar >
+      <ion-buttons slot="start" >
+          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+        </ion-buttons>
+    <ion-title > <font color="blue"> 후보자 보기 </font> </ion-title>
+
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+<br>
+<ion-card *ngFor="let item of items" id={{items.indexOf(item)}} >
+ <ion-item>
+      <table class="product_tabel" >
+     
+        <tr>
+            <td rowspan="2"  >
+              <ion-avatar>
+                <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
+              </ion-avatar>
+            </td>
+            <td rowspan="2">
+              &nbsp;&nbsp; {{item.c_num}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.c_name}}
+            </td>
+         
+        </tr>
+        
+     
+      </table>
+    </ion-item>
+  </ion-card>
+
 
 </ion-content>

@@ -3,10 +3,10 @@
 
     <ion-buttons slot="end">
       <ion-button  (click)="gohome()">
-       <font style="color: blue;">로그아웃</font> 
+       <font style="color: #3B7AE1;">로그아웃</font> 
       </ion-button>
     </ion-buttons>
-      <ion-title><font color="blue"><b>선거목록</b></font></ion-title>
+      <ion-title><font color="#3B7AE1"><b>선거목록</b></font></ion-title>
  
     </ion-toolbar>
 
@@ -35,9 +35,12 @@
         </table>
         <div *ngIf="state[i]=='투표중'" slot="end"><font style="color:#3B7AE1;">{{item.ue_state}}</font></div>
         <div *ngIf="state[i]=='투표완료'" slot="end"><font style="color: green;">{{item.ue_state}}</font></div>
+        <div *ngIf="state[i]=='선거종료'" slot="end"><font style="color:red;">{{item.ue_state}}</font></div>
+
 
        
     </ion-item>
   </ion-card>
+
 </ion-list>
 </ion-content>

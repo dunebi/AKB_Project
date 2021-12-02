@@ -59,11 +59,19 @@ export class UsermainPage {
     })
   }
   async getElection(item : any) {
+    if(item.ue_state=="선거종료")
+    {
+      this
+      .router
+      .navigate(['showresult', item.EID]);
+    }
+    else{
     this.eid = item.EID;
     this.ustate = item.ue_state;
     this
         .router
         .navigate(['userElection', this.eid,this.uid,this.ustate]);
+    }
 }
 gohome(){
   this

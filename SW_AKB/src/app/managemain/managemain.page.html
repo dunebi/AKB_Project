@@ -3,10 +3,10 @@
 
     <ion-buttons slot="end">
       <ion-button (click)="gohome()">
-       <font style="color: blue;">로그아웃</font> 
+       <font style="color: #3B7AE1;">로그아웃</font> 
       </ion-button>
     </ion-buttons>
-      <ion-title><font color="blue"><b>관리자메뉴</b></font></ion-title>
+      <ion-title><font color="#3B7AE1"><b>관리자메뉴</b></font></ion-title>
  
     </ion-toolbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)" >
@@ -48,9 +48,10 @@
 
                 <div *ngIf="state[i]=='저장완료'" slot="end"><font style="color:#3B7AE1;">{{item.e_state}}</font></div>
                 <div *ngIf="state[i]=='반려'" slot="end"><font style="color: red;">{{item.e_state}}</font></div>
-                <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
+                <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: rgba(255, 187, 0, 0.808)">{{item.e_state}}</font></div>
                 <div *ngIf="state[i]=='승인완료'" slot="end"><font style="color:#00ACEE">{{item.e_state}}</font></div>
                 <div *ngIf="state[i]=='투표중'" slot="end"><font style="color :green">{{item.e_state}}</font></div>
+                <div *ngIf="state[i]=='선거종료'" slot="end"><font style="color :red">{{item.e_state}}</font></div>
                 
             </ion-item>
            
@@ -77,7 +78,7 @@
  
               <div *ngIf="state[i]=='저장완료'" slot="end"><font style="color:#3B7AE1;">{{item.e_state}}</font></div>
               <div *ngIf="state[i]=='반려'" slot="end"><font style="color: red;">{{item.e_state}}</font></div>
-              <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
+              <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: rgba(255, 187, 0, 0.808)">{{item.e_state}}</font></div>
               <div *ngIf="state[i]=='승인완료'" slot="end"><font style="color:#00ACEE">{{item.e_state}}</font></div>
               <div *ngIf="state[i]=='투표중'" slot="end"><font style="color :green">{{item.e_state}}</font></div>
               

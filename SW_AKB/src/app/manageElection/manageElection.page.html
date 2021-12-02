@@ -8,22 +8,28 @@
 </ion-header>
 
 <ion-content >
-  <center>
-  <ion-grid style="background-color: beige;">
+ 
+  <ion-grid >
+  
     <ion-row *ngFor = "let item of load_items">
 <ion-col size="6">
 <ion-item lines="none">
-선거 시작<br> {{item.e_startdate}}
+  <center>
+&nbsp;&nbsp;&nbsp;선거 시작<br> &nbsp;&nbsp;&nbsp;{{item.e_startdate}}
+</center>
 </ion-item>
 </ion-col>
 <ion-col size="6">
   <ion-item lines="none">
-선거 종료<br>{{item.e_enddate}}
+    <center>
+      &nbsp;&nbsp;&nbsp;선거 종료<br>&nbsp;&nbsp;&nbsp;{{item.e_enddate}}
+</center>
   </ion-item>
 </ion-col>
     </ion-row>
+
   </ion-grid>
-</center>
+
   <div class="menu">
       <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
 
@@ -54,6 +60,6 @@
 </div>
 
 <div class=sbutton>
-  <ion-button  color="" expand="block" (click)="sign()">개표하기</ion-button>
+  <ion-button  color="" expand="block" (click)="open()">개표하기</ion-button>
   </div>
 </ion-content>

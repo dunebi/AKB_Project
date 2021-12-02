@@ -6,7 +6,10 @@ import {Chartdoughnut} from 'chartjs-plugin-doughnutlabel'
 import { Location } from "@angular/common";
 import { Observable } from 'rxjs';
 import {HttpClient} from '@angular/common/http'; 
+import {Router, ActivatedRoute} from '@angular/router';
+import { AlertController, NavController } from '@ionic/angular';
 import Web3 from 'web3';
+
 
 const web3 = new Web3('ws://localhost:8546');
 let _this;
@@ -32,8 +35,13 @@ export class ShowresultPage  implements AfterViewInit {
   endVoterCnt: any;
   maxVoterCnt: any;
   voteRate: String;
+  winnerIndex: number;
+  winner: String;
 
-  constructor(private location: Location,public http:HttpClient) { _this=this;}
+  constructor(private location: Location,public http:HttpClient, private ac:ActivatedRoute) { 
+    _this=this;
+    this.winnerIndex = 0;
+  }
 
   // When we try to call our chart to initialnpm install chartjs-plugin-labelsize methods in ngOnInit() it shows an error nativeElement of undefined. 
   // So, we need to call all chart methods in ngAfterViewInit() where @ViewChild and @ViewChildren will be resolved.
@@ -47,7 +55,7 @@ export class ShowresultPage  implements AfterViewInit {
   async make_json(){
 
     let formData = new FormData();
-    this.eid='3';
+    this.eid = this.ac.snapshot.paramMap.get('eid');
     formData.append('eid',this.eid);
     try {
       //localhost 용
@@ -84,7 +92,7 @@ export class ShowresultPage  implements AfterViewInit {
       this.adminAddr = this.items2[0].account;
       this.contractAddr = this.items2[0].contract;
       this.getVoteCountCall()
-     
+
       console.log(this.items2);
      
     }, (error) => {
@@ -114,8 +122,8 @@ export class ShowresultPage  implements AfterViewInit {
           label: '# of Votes',
           data: this.getvote,
           backgroundColor: [
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 99, 132, 0.2)'
+            '#F94144','#F8961E','#F9C74F','#90BE6D','#43AA8B'
+        
 
         
           ],
@@ -132,7 +140,7 @@ export class ShowresultPage  implements AfterViewInit {
           Chartdoughnut,
           labels: {
             render: 'percentage',
-            fontColor: ['green', 'red'],
+            fontColor: ['white', 'white','white','white','white'],
             precision: 2
           },
 
@@ -170,10 +178,13 @@ export class ShowresultPage  implements AfterViewInit {
    
   async getVoteCountCall() {
     var contract = new web3.eth.Contract(JSON.parse(this.abi), this.contractAddr);
+    let maxVoteCnt = 0;
+    web3.eth.personal.unlockAccount(this.adminAddr, "1234", 0);
 
     for(let i = 0; i < this.candidate_num.length; i++) {
      await contract.methods.getVoteCount(this.candidate_num[i]).call().then(function(result)
      {
+        if(maxVoteCnt < result) _this.winnerIndex = i;
         _this.getvote.push(parseInt(result))
      }
      );
@@ -194,6 +205,11 @@ export class ShowresultPage  implements AfterViewInit {
 
     this.voteRate = (((this.endVoterCnt) / (this.maxVoterCnt)) * 100).toFixed(2).toString() + '%';
     console.log(this.voteRate);
+    console.log(this.candidate[this.winnerIndex]);
+    this.winner = this.candidate[this.winnerIndex];
     this.doughnutChartMethod();
   }
+
+
+ 
 }

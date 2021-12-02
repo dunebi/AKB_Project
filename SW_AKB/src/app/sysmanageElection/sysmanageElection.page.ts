@@ -2,7 +2,8 @@ import { Component} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { Location } from "@angular/common";
+import { SysManagemainPage } from '../sysmanagemain/sysmanagemain.page';
 @Component({
   selector: 'app-home',
   templateUrl: 'sysmanageElection.page.html',
@@ -12,7 +13,7 @@ export class SysManageElectionPage{
   private eid:string;
   private items:any;
 
-  constructor(private router:Router, private ac:ActivatedRoute, private http:HttpClient) { 
+  constructor(private location:Location,private router:Router, private ac:ActivatedRoute, private http:HttpClient) { 
     this.make_json()
   }
 
@@ -35,7 +36,9 @@ export class SysManageElectionPage{
       console.log(err);
     }
   }
-
+  myBackButton(){
+    this.router.navigate(['sysmanagemain']);
+  }
   async loadData(){
     let data : Observable<any>;
     data = await this.http.get('http://34.64.125.190:3000/electiondatajson');

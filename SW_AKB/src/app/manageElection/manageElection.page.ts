@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Router, ActivatedRoute} from "@angular/router";
 import {HttpClient} from '@angular/common/http'; 
 import Web3 from 'web3';
+import { AlertController } from '@ionic/angular';
 
 const web3 = new Web3('ws://localhost:8546');
 let _this;
@@ -34,7 +35,9 @@ export class ManageElectionPage  implements AfterViewInit {
   mid: string;
 
 
-  constructor(private router:Router, private ac:ActivatedRoute,private location: Location,public http:HttpClient) { _this = this;
+  constructor(
+    public atrCtrl : AlertController,
+    private router:Router, private ac:ActivatedRoute,private location: Location,public http:HttpClient) { _this = this;
     this.eid = this.ac.snapshot.paramMap.get('eid');
     this.mid = this.ac.snapshot.paramMap.get('mid');
     this.loadData();
@@ -118,8 +121,8 @@ export class ManageElectionPage  implements AfterViewInit {
           label: '# of Votes',
           data: this.getVoterCnt,
           backgroundColor: [
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 99, 132, 0.2)'
+            '#3B7AE1',
+            '#BDBDBD',
 
         
           ],
@@ -136,19 +139,19 @@ export class ManageElectionPage  implements AfterViewInit {
           Chartdoughnut,
           labels: {
             render: 'percentage',
-            fontColor: ['green', 'red'],
+            fontColor: ['white', 'white'],
             precision: 2
           },
           doughnutlabel: {
             labels: [
               {
-                  text: this.voteCnt,
+                  text: this.voteRate,
                   font: {
                   size: '30',
                   weight: 'bold',
                   }
             },{
-                text: '투표/미투표',
+                text: '투표율',
                 font: {
                 size: '20',
                 weight: 'bold',
@@ -204,4 +207,58 @@ export class ManageElectionPage  implements AfterViewInit {
   myBackButton(){
     this.router.navigate(['managemain', this.mid]);
   }
+
+  open(){
+    this
+    .atrCtrl
+    .create({
+        header: '',
+        message: '현재 선거기간중입니다. 정말로 선거를 종료하고 개표를 진행하시겠습니까?',
+        buttons: [
+            {
+                text: '취소',
+                role: 'cancle'
+            }, {
+                text: '확인',
+                role: 'confirm',
+                handler: () => {
+                 this.openvote(this.eid)
+                }
+            }
+        ]
+    })
+    .then(alertEl => {
+        alertEl.present();
+    })
+  }
+
+  async openvote(i: any){
+    let formData = new FormData();
+    formData.append('eid', i);
+    try{
+      const response = await fetch('http://34.64.125.190:3000/openvote' , {
+      method : 'POST',
+      body : formData
+    });
+    if(!response.ok){
+      throw new Error(response.statusText);
+    }
+    console.log(response)
+    this.atrCtrl.create({
+      header : "",
+      message : "선거가 성공적으로 종료되었습니다."
+
+    }).then(alertEl => {
+      alertEl.present();
+    })
+    this.router.navigate(['managemain', this.mid]).then(() => { window.location.reload()})
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+
 }
+
+

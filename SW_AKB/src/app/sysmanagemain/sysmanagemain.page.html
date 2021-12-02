@@ -1,18 +1,14 @@
 <ion-header>
   <ion-toolbar color = "" style="border-bottom: 0.5px solid gray;">
 
-    <ion-buttons slot="end">
-      <ion-button>
-       <font style="color: blue;">로그아웃</font> 
-      </ion-button>
-    </ion-buttons>
-      <ion-title><font color="blue"><b>관리자메뉴</b></font></ion-title>
+    
+      <ion-title><font color="#3B7AE1"><b>시스템 관리자</b></font></ion-title>
  
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list *ngFor="let item of items; let i = index;" >
-      <div *ngIf="items[i]!=null">
+    <ion-list *ngFor="let item of items2; let i = index;" >
+      <div *ngIf="items2[i]!=null">
         <ion-card *ngIf="ary[i]==false" (click)="touch(i)">
             <ion-item >
                 <table class="product_tabel">
@@ -35,7 +31,7 @@
                     </tr>
                 </table>
 
-                <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
+                <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: rgba(255, 187, 0, 0.808)">{{item.e_state}}</font></div>
             </ion-item>
            
         </ion-card>
@@ -59,7 +55,7 @@
                   </tr>
               </table>
 
-              <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
+              <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: rgba(255, 187, 0, 0.808)">{{item.e_state}}</font></div>
 
           </ion-item>
           <ion-item>

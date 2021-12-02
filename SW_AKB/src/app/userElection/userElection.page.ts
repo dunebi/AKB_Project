@@ -115,6 +115,7 @@ export class UserElectionPage  implements AfterViewInit {
 
   doughnutChartMethod() {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+    
       type: 'doughnut',
       data: {
         labels: ['투표완료','미투표'],
@@ -122,10 +123,12 @@ export class UserElectionPage  implements AfterViewInit {
           label: '# of Votes',
           data: this.getVoterCnt,
           backgroundColor: [
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 99, 132, 0.2)'
-
+          
+            '#3B7AE1',
+            '#BDBDBD',
+          
         
+             
           ],
           hoverBackgroundColor: [
             '#FFCE56',
@@ -135,24 +138,27 @@ export class UserElectionPage  implements AfterViewInit {
         }]
       },
       options: {
+     
         plugins:  { 
+      
           ChartDataLabels,
           Chartdoughnut,
+        
           labels: {
             render: 'percentage',
-            fontColor: ['green', 'red'],
+            fontColor: ['white','white',],
             precision: 2
           },
           doughnutlabel: {
             labels: [
               {
-                  text: this.voteCnt,
+                  text: this.voteRate,
                   font: {
                   size: '30',
                   weight: 'bold',
                   }
             },{
-                text: '투표/미투표',
+                text: '투표율',
                 font: {
                 size: '20',
                 weight: 'bold',
@@ -160,6 +166,7 @@ export class UserElectionPage  implements AfterViewInit {
             },
             ]
           }
+          ,  
         },
         animation: {
           animateScale: true,

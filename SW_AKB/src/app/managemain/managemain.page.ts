@@ -57,10 +57,24 @@ export class ManagemainPage {
 
         if (this.segment == "전체") {
             this.items = this.temp;
-        } else if (this.segment == "승인") {
+            for (let i = 0; i < this.items.length; i++) {
+                this.state[i] = this
+                    .items[i]
+                    .e_state;
+        }
+    } else if (this.segment == "승인") {
             this.items = this.admit;
+            for (let i = 0; i < this.items.length; i++) {
+                this.state[i] = this
+                    .items[i]
+                    .e_state;
+    }
         } else {
             this.items = this.notadmit;
+            for (let i = 0; i < this.items.length; i++) {
+                this.state[i] = this
+                    .items[i]
+                    .e_state;}
         }
 
     }
@@ -76,7 +90,7 @@ export class ManagemainPage {
             console.log(this.items.length)
             this.ary = new Array(this.items.length).fill(false);
             this.state = new Array(this.items.length)
-            this.admit = new Array(this.items.length).fill(null);
+            this.admit = [];
             this.notadmit = [];
             for (let i = 0; i < this.items.length; i++) {
                 this.state[i] = this
@@ -85,10 +99,10 @@ export class ManagemainPage {
                 console.log(this.state[i]);
                 if (this.items[i].e_state == "저장완료" || this.items[i].e_state == "심사중" || this.items[i].e_state=="반려") {
                     this.notadmit.push(this.items[i]);
-                    console.log(this.notadmit[i]);
+                    console.log(this.notadmit);
                 } else {
-                    this.admit[i] = this.items[i]
-                    console.log(this.admit[i])
+                    this.admit.push(this.items[i]);
+                    console.log(this.admit)
                 }
             }
            
@@ -98,11 +112,20 @@ export class ManagemainPage {
         })
     }
     touch(i) {
+        console.log(this.items[i])
+        if(this.items[i].e_state=="선거종료")
+        {
+            this
+            .router
+            .navigate(['showresult', this.items[i].EID]);
+        }
+        else{
         if (this.ary[i] == true) {
             this.ary[i] = false;
         } else {
             this.ary[i] = true;
         }
+       }
     }
     async getElection(item : any) {
         this.eid = item.EID;

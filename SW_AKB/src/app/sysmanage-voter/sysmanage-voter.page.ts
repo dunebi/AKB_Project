@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-sysmanage-voter',
@@ -12,11 +13,14 @@ export class SysmanageVoterPage implements OnInit {
   private eid:string;
   private items:any;
   public items_length: number;
-  constructor(private http:HttpClient, private ac:ActivatedRoute) { 
+  constructor(private location:Location,private http:HttpClient, private ac:ActivatedRoute) { 
     this.make_json();
   }
 
   ngOnInit() {
+  }
+  myBackButton(){
+    this.location.back();
   }
   async make_json(){
     this.eid = this.ac.snapshot.paramMap.get('eid');

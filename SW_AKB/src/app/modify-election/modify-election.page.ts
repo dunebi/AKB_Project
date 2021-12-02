@@ -93,6 +93,8 @@ export class ModifyElectionPage implements OnInit {
     data = await this.http.get('http://34.64.125.190:3000/electiondatajson');
     data.subscribe(result => {
       this.items = result
+      this.s_d = this.items[0].e_startdate;
+      this.e_d = this.items[0].e_enddate;
     })
   }
 

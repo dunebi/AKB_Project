@@ -3,27 +3,34 @@
       <ion-buttons slot="start">
           <ion-back-button  color="primary" defaultHref="/Tab2" (click)='myBackButton()' ></ion-back-button>
         </ion-buttons>
-        <ion-title><font color="blue"><b>선거관리</b></font></ion-title>
+        <ion-title><font color="#3B7AE1"><b>선거관리</b></font></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content >
-  <center>
-  <ion-grid style="background-color: beige;">
-    <ion-row *ngFor = "let item of load_items">
-<ion-col size="6">
-<ion-item lines="none">
-선거 시작<br> {{item.e_startdate}} {{item.ue_state}}
-</ion-item>
-</ion-col>
-<ion-col size="6">
+
+    <ion-grid >
+  
+      <ion-row *ngFor = "let item of load_items">
+  <ion-col size="6">
   <ion-item lines="none">
-선거 종료<br>{{item.e_enddate}}
+    <center>
+  &nbsp;&nbsp;&nbsp;선거 시작<br> &nbsp;&nbsp;&nbsp;{{item.e_startdate}}
+  </center>
   </ion-item>
-</ion-col>
-    </ion-row>
-  </ion-grid>
-</center>
+  </ion-col>
+  <ion-col size="6">
+    <ion-item lines="none">
+      <center>
+        &nbsp;&nbsp;&nbsp;선거 종료<br>&nbsp;&nbsp;&nbsp;{{item.e_enddate}}
+  </center>
+    </ion-item>
+  </ion-col>
+      </ion-row>
+  
+    </ion-grid>
+  
+
   <div class="menu">
       <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
 

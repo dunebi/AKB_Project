@@ -73,7 +73,7 @@ const routes: Routes = [
     loadChildren: () => import('./test/test.module').then( m => m.TestPageModule)
   },
   {
-    path: 'showresult',
+    path: 'showresult/:eid',
     loadChildren: () => import('./showresult/showresult.module').then( m => m.ShowresultPageModule)
   },
   {

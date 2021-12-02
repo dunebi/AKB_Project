@@ -47,7 +47,6 @@ export class VotePage implements OnInit {
   async make_json(){
 
     let formData = new FormData();
-    this.eid='3';
     formData.append('eid',this.eid);
     try {
       //localhost 용
