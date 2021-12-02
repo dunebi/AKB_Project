@@ -2,7 +2,7 @@
   <ion-toolbar color = "" style="border-bottom: 0.5px solid gray;">
 
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="gohome()">
        <font style="color: blue;">로그아웃</font> 
       </ion-button>
     </ion-buttons>
@@ -47,9 +47,11 @@
                 </table>
 
                 <div *ngIf="state[i]=='저장완료'" slot="end"><font style="color:#3B7AE1;">{{item.e_state}}</font></div>
+                <div *ngIf="state[i]=='반려'" slot="end"><font style="color: red;">{{item.e_state}}</font></div>
                 <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
-                <div *ngIf="state[i]=='투표중'" slot="end"><font style="color :green">{{item.e_state}}</font></div>
                 <div *ngIf="state[i]=='승인완료'" slot="end"><font style="color:#00ACEE">{{item.e_state}}</font></div>
+                <div *ngIf="state[i]=='투표중'" slot="end"><font style="color :green">{{item.e_state}}</font></div>
+                
             </ion-item>
            
         </ion-card>
@@ -74,16 +76,20 @@
               </table>
  
               <div *ngIf="state[i]=='저장완료'" slot="end"><font style="color:#3B7AE1;">{{item.e_state}}</font></div>
+              <div *ngIf="state[i]=='반려'" slot="end"><font style="color: red;">{{item.e_state}}</font></div>
               <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
-              <div *ngIf="state[i]=='투표중'" slot="end"><font style="color :green">{{item.e_state}}</font></div>
               <div *ngIf="state[i]=='승인완료'" slot="end"><font style="color:#00ACEE">{{item.e_state}}</font></div>
+              <div *ngIf="state[i]=='투표중'" slot="end"><font style="color :green">{{item.e_state}}</font></div>
+              
 
           </ion-item>
           <ion-item>
-              <ion-button color="danger">삭제</ion-button>
-              <ion-button color="secondary">수정</ion-button>
-              <ion-button color="tertiary">승인신청</ion-button>
-              <ion-button color="success">선거보기</ion-button>
+              <ion-button   color="danger" (click)="deletefunc(item)">삭제</ion-button>
+              <ion-button color="secondary" (click)="modify(item)">수정</ion-button>
+              <ion-button *ngIf="state[i]!='반려'" color="tertiary" (click)="applyfunc(item)">승인신청</ion-button>
+              <ion-button *ngIf="state[i]=='반려'" color="tertiary" (click)="applyfunc(item)">재승인신청</ion-button>
+              <ion-button color="success"  (click)="getElection(item)">선거보기</ion-button>
+              
           </ion-item>
       </ion-card>
       </div>
@@ -91,3 +97,6 @@
 
    
 </ion-content>
+<div class="sbutton">
+    <ion-button  color="" expand="block" (click)="createElection()">선거개설하기</ion-button>
+</div>

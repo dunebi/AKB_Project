@@ -2,7 +2,7 @@
 <ion-header>
   <ion-toolbar >
       <ion-buttons slot="start" >
-          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+          <ion-back-button  color="primary" defaultHref="tab2" (click)='myBackButton()'></ion-back-button>
         </ion-buttons>
     <ion-title > <font color="blue"> 명부관리 </font> </ion-title>
   
@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content class="menu">
   <br>
-  <ion-button *ngIf ="editflag" size="Large" style="margin-left: 20px;" (click)="end()" >완료</ion-button>   
+  <ion-button *ngIf ="editflag" size="Large" style="margin-left: 20px;" (click)="modify_database()" >완료</ion-button>   
   <ion-item lines="none" class="nav">  
       <ion-img src='assets/sw_image/+.png' style='width:50px; height:50px; ' *ngIf ="editflag" (click)="plus()" ></ion-img>&nbsp;&nbsp;
      <ion-img src='assets/sw_image/save.png' style='width:50px; height:50px; ' *ngIf ="editflag" (click)="save()" ></ion-img>&nbsp;&nbsp;

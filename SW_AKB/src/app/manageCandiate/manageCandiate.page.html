@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar >
       <ion-buttons slot="start" >
-          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+          <ion-back-button  color="primary" defaultHref="/Tab2" (click)='myBackButton()'></ion-back-button>
         </ion-buttons>
     <ion-title > <font color="blue"> 후보자관리 </font> </ion-title>
 
@@ -9,7 +9,7 @@
 </ion-header>
 <ion-content>
 <br>
-<ion-card >
+<ion-card *ngFor="let item of items" id={{items.indexOf(item)}} >
  <ion-item>
       <table class="product_tabel" >
      
@@ -20,7 +20,7 @@
               </ion-avatar>
             </td>
             <td rowspan="2">
-              &nbsp;&nbsp; 1 김철수
+              &nbsp;&nbsp; {{item.c_num}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.c_name}}
             </td>
          
         </tr>
@@ -28,7 +28,7 @@
      
       </table>
  
-      <ion-icon slot ="end" (click)="delete()" name="remove-circle-outline" color="danger" size="large" ></ion-icon>
+      <ion-icon slot ="end" id ={{items.indexOf(item)}} (click)="delete($event)" name="remove-circle-outline" color="danger" size="large" ></ion-icon>
 
     </ion-item>
   </ion-card>

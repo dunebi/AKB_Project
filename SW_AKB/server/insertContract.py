@@ -12,9 +12,8 @@ db = pymysql.connect(host='localhost', port=3306, user='root', passwd='1234', db
 
 cursor = db.cursor()
 
-contract_info = [[eid,adminAddr,contractAddr]]
-contract_sql = "INSERT OR UPDATE INTO ADDRESS(EID, contract, account) values (%s, %s, %s);"
-cursor.executemany(contract_sql, contract_info)
+sql = "UPDATE USER_ELECTION SET ue_state=1 WHERE EID=" + sys.argv[1] + " AND UID=" + sys.argv[2] + ";"
+cursor.execute(sql)
 db.commit()
 
 db.close()

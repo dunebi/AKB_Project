@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController} from "@ionic/angular";
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+import { Location } from "@angular/common";
 @Component({
   selector: 'app-home',
   templateUrl: 'manageVoter.page.html',
@@ -19,7 +19,7 @@ export class ManageVoterPage {
  public searchinput:string="";
 
 
-  constructor(public atrCtrl: AlertController,public http: HttpClient) {
+  constructor(private location: Location, public atrCtrl: AlertController,public http: HttpClient) {
     this.make_json();
    
   }
@@ -31,6 +31,7 @@ export class ManageVoterPage {
 
     let formData = new FormData();
     
+    formData.append('eid',this.eid);
     formData.append('insert',JSON.stringify(this.insert));
     
     
@@ -41,6 +42,8 @@ export class ManageVoterPage {
         method: 'POST',
         body: formData,
       });
+
+    window.location.reload()
    
 
 
@@ -52,7 +55,7 @@ export class ManageVoterPage {
   async make_json(){
 
     let formData = new FormData();
-    this.eid='1';
+    this.eid='3';
     formData.append('eid',this.eid);
     try {
       const response = await fetch('http://34.64.125.190:3000/manageVoter', {
@@ -110,7 +113,7 @@ export class ManageVoterPage {
       {
         text: '취소',
         role: 'cancel',
-        handler:()=> {this.modify_database();}
+        handler:()=> {}
       },
       {
         text: '명부추가',
@@ -179,5 +182,8 @@ edit() {
   else{
     this.editflag=true;
   }
+}
+myBackButton(){
+  this.location.back();
 }
 }

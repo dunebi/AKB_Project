@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar >
       <ion-buttons slot="start" >
-          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+          <ion-back-button  color="primary" defaultHref="tab2" (click)='myBackButton()'></ion-back-button>
         </ion-buttons>
     <ion-title > <font color="blue"> 후보자보기 </font> </ion-title>
 
@@ -9,6 +9,7 @@
 </ion-header>
 <ion-content class="menu" >
   <br>
+  <div *ngFor = "let item of items">
   <ion-card >
     <ion-item>
       <table class="product_tabel" >
@@ -21,19 +22,20 @@
           </td>
           <td>
             <br>
-          기호 1번 김철수
+            
+          기호 {{item.c_num}}번 {{item.c_name}}
           </td>
       </tr>
       <tr> 
         <td>
-         <h6> 1998-55-55</h6>  
+         <h6> {{item.c_birth}}</h6>  
         </td> 
       
   
       </tr>
       <tr> 
         <td>
-         <h6> 성별</h6>  
+         <h6> 성별 {{item.c_sex}}</h6>  
         </td> 
       
   
@@ -51,7 +53,9 @@
     
     </ion-item>
     <center>
-    <font style="color:red; size: 6em;"><b>1.시발 내가 당선되면 가스폭발 간다.</b></font>
+    <font style="color:red; size: 6em;"><b>{{item.c_promise}}</b></font>
   </center>
   </ion-card>
+  </div>
   
+  </ion-content>

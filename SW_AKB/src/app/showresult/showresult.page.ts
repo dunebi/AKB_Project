@@ -80,7 +80,7 @@ export class ShowresultPage  implements AfterViewInit {
     data.subscribe(result =>{
       this.items2 = result;
 
-      // DB에 바껴서 들어가있음..
+      // getData
       this.adminAddr = this.items2[0].account;
       this.contractAddr = this.items2[0].contract;
       this.getVoteCountCall()

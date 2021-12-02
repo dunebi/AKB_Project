@@ -6,81 +6,70 @@
        <font style="color: blue;">로그아웃</font> 
       </ion-button>
     </ion-buttons>
-      <ion-title><font color="blue"><b>시스템관리자메뉴</b></font></ion-title>
+      <ion-title><font color="blue"><b>관리자메뉴</b></font></ion-title>
  
     </ion-toolbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)" >
-      <ion-segment-button value="전체">
-      <ion-label>전체</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="승인">
-          <ion-label>승인</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="미승인">
-            <ion-label>미승인</ion-label>
-            </ion-segment-button>
-    </ion-segment>
 </ion-header>
-<ion-content >
-  <ion-card>
-    <ion-item lines="none" >
-      <table class="product_tabel" >
-        <tr>
-            <td rowspan="2" width="20vh;" >
-              <ion-avatar>
-                <ion-img src='assets/sw_image/manual-voting.png' style='width:100%;height:100%'></ion-img>
-              </ion-avatar>
-            </td>
-            <td>
-            선거 제목
-            </td>
-        </tr>
-        <tr> 
-          <td>
-           <h6> 선거 기간</h6>  
-          </td> 
-        
-    
-        </tr>
-      </table>
-      <ion-icon slot ="end" name="heart" size="large" class="fullheart" ></ion-icon>
-</ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item  >
-      <table class="product_tabel" >
-        <tr>
-            <td rowspan="2" width="20vh;" >
-              <ion-avatar>
-                <ion-img src='assets/sw_image/manual-voting.png' style='width:100%;height:100%'></ion-img>
-              </ion-avatar>
-            </td>
-            <td>
-            선거 제목
-            </td>
-        </tr>
-        <tr> 
-          <td>
-           <h6> 선거 기간</h6>  
-          </td> 
-        
-    
-        </tr>
-      </table>
-      <ion-icon slot ="end" name="heart" size="large" class="fullheart" ></ion-icon>
-</ion-item>
-<ion-item>
-  <ion-button color="danger">삭제</ion-button>
-  <ion-button color="secondary">수정</ion-button>
-  <ion-button color="tertiary">승인신청</ion-button>
-  <ion-button color="success">선거보기</ion-button>
-</ion-item>
-  </ion-card>
+<ion-content>
+    <ion-list *ngFor="let item of items; let i = index;" >
+      <div *ngIf="items[i]!=null">
+        <ion-card *ngIf="ary[i]==false" (click)="touch(i)">
+            <ion-item >
+                <table class="product_tabel">
+                    <tr>
+                        <td rowspan="2" width="20vh;">
+                            <ion-avatar>
+                                <ion-img src='assets/sw_image/manual-voting.png' style='width:100%;height:100%'></ion-img>
+                            </ion-avatar>
+                        </td>
+                        <td>
+                            {{item.e_name}}
+                       
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6>{{item.e_date}}</h6>
+                        </td>
+                    </tr>
+                </table>
 
-  <ion-card>
-    
-  </ion-card>
+                <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
+            </ion-item>
+           
+        </ion-card>
+        <ion-card  *ngIf="ary[i]==true" (click)="touch(i)">
+          <ion-item >
+              <table class="product_tabel">
+                  <tr>
+                      <td rowspan="2" width="20vh;">
+                          <ion-avatar>
+                              <ion-img src='assets/sw_image/manual-voting.png' style='width:100%;height:100%'></ion-img>
+                          </ion-avatar>
+                      </td>
+                      <td>
+                          {{item.e_name}}
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <h6>{{item.e_date}}</h6>
+                      </td>
+                  </tr>
+              </table>
 
+              <div *ngIf="state[i]=='심사중'" slot="end"><font style="color: yellow">{{item.e_state}}</font></div>
 
+          </ion-item>
+          <ion-item>
+              <ion-button color="danger" (click)="changefunc(item)">반려</ion-button>
+              <ion-button color="secondary" (click)="toelectionInfo(item)">정보</ion-button>
+              <ion-button color="tertiary" (click)="applyfunc(item)">승인</ion-button>
+          </ion-item>
+      </ion-card>
+      </div>
+    </ion-list>
 
+   
 </ion-content>

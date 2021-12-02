@@ -8,12 +8,12 @@
 </ion-header>
 
 <ion-content class="menu">
-  <div class="ion-padding">
+  <div class="ion-padding" *ngFor="let item of items">
  
      선거개요
      <br>
      <ion-card style="height: 250px; ">
-      tsdaf
+      {{item.e_content}}
 
      </ion-card>
  
@@ -25,7 +25,7 @@
     <ion-row>
       <ion-col>
 <ion-card>
-  <ion-img [routerLink]="['/manageVoter']" src='assets/sw_image/listimage.png' style="width: 100%;height: 130px;"></ion-img>
+  <ion-img (click)="tosysmanageVoter()" src='assets/sw_image/listimage.png' style="width: 100%;height: 130px;"></ion-img>
 </ion-card>
 
 
@@ -33,7 +33,7 @@
       </ion-col>
       <ion-col>
         <ion-card>
-          <ion-img [routerLink]="['/manageCandiate']" src='assets/sw_image/mbman.png' style="width: 100%;height: 130px;" ></ion-img>
+          <ion-img (click)="tosysmanageCandidate()" src='assets/sw_image/mbman.png' style="width: 100%;height: 130px;" ></ion-img>
         </ion-card>
       </ion-col>
     </ion-row>

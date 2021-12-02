@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
+import {Router, ActivatedRoute} from '@angular/router';
 import { VotePage } from './vote.page';
 
 describe('VotePage', () => {

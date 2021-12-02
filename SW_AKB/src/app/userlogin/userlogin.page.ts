@@ -4,7 +4,7 @@ import { AlertController, NavController } from '@ionic/angular';
 import { getAuth, RecaptchaVerifier,signInWithPhoneNumber } from "firebase/auth";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Location } from "@angular/common";
 
 let _this;
 
@@ -26,6 +26,7 @@ export class UserloginPage {
   
 
  constructor(
+  private location:Location,
    private alertCtrl:AlertController,
    public ac:ActivatedRoute,
    public router: Router,
@@ -197,5 +198,7 @@ async createSMSphone(){
 
 }
 
-
+myBackButton(){
+  this.location.back();
+}
 }

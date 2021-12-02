@@ -7,7 +7,10 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
-
+  {
+    path: 'vote/:eid/:uid',
+    loadChildren: () => import('./vote/vote.module').then( m => m.VotePageModule)
+  },
   {
     path: 'userlogin',
     loadChildren: () => import('./userlogin/userlogin.module').then( m => m.UserloginPageModule)
@@ -17,31 +20,31 @@ const routes: Routes = [
     loadChildren: () => import('./managelogin/managelogin.module').then( m => m.ManageloginPageModule)
   },
   {
-    path: 'usermain',
+    path: 'usermain/:uid',
     loadChildren: () => import('./usermain/usermain.module').then( m => m.UsermainPageModule)
   },
   {
-    path: 'managemain',
+    path: 'managemain/:mid',
     loadChildren: () => import('./managemain/managemain.module').then( m => m.ManagemainPageModule)
   },
   {
-    path: 'createElection',
+    path: 'createElection/:mid',
     loadChildren: () => import('./createElection/createElection.module').then( m => m.CreateElectionPageModule)
   },
   {
-    path: 'manageElection',
+    path: 'manageElection/:eid/:mid',
     loadChildren: () => import('./manageElection/manageElection.module').then( m => m.ManageElectionPageModule)
   },
   {
-    path: 'userElection',
+    path: 'userElection/:eid/:uid/:ustate',
     loadChildren: () => import('./userElection/userElection.module').then( m => m.UserElectionPageModule)
   },
   {
-    path: 'manageCandiate',
+    path: 'manageCandiate/:eid',
     loadChildren: () => import('./manageCandiate/manageCandiate.module').then( m => m.ManageCandiatePageModule)
   },
   {
-    path: 'manageVoter',
+    path: 'manageVoter/:eid',
     loadChildren: () => import('./manageVoter/manageVoter.module').then( m => m.ManageVoterPageModule)
   },
   {
@@ -53,11 +56,7 @@ const routes: Routes = [
     loadChildren: () => import('./sign/sign.module').then( m => m.SignPageModule)
   },
   {
-    path: 'vote',
-    loadChildren: () => import('./vote/vote.module').then( m => m.VotePageModule)
-  },
-  {
-    path: 'showCandiate',
+    path: 'showCandiate/:eid',
     loadChildren: () => import('./showCandiate/showCandiate.module').then( m => m.ShowCandiatePageModule)
   },
   {
@@ -66,14 +65,8 @@ const routes: Routes = [
   },
   
   {
-    path: 'sysmanageElection',
+    path: 'sysmanageElection/:eid',
     loadChildren: () => import('./sysmanageElection/sysmanageElection.module').then( m => m.SysManageElectionPageModule)
-  },
-  
-  {
-    path: '',
-    redirectTo: 'test',
-    pathMatch: 'full'
   },
   {
     path: 'test',
@@ -83,14 +76,31 @@ const routes: Routes = [
     path: 'showresult',
     loadChildren: () => import('./showresult/showresult.module').then( m => m.ShowresultPageModule)
   },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'sysmanage-voter/:eid',
+    loadChildren: () => import('./sysmanage-voter/sysmanage-voter.module').then( m => m.SysmanageVoterPageModule)
+  },
+  {
+    path: 'sysmanage-candidate/:eid',
+    loadChildren: () => import('./sysmanage-candidate/sysmanage-candidate.module').then( m => m.SysmanageCandidatePageModule)
+  },
+  {
+    path: 'modify-election/:eid/:mid',
+    loadChildren: () => import('./modify-election/modify-election.module').then( m => m.ModifyElectionPageModule)
+  },
 
 
 ];
 
 @NgModule({
   imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
     HttpClientModule,
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })

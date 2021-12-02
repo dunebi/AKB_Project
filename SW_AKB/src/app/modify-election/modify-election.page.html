@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color ="">
+    <ion-buttons slot="start">
+        <ion-back-button  color="primary" defaultHref="/Tab2" (click)='myBackButton()' ></ion-back-button>
+      </ion-buttons>
+      <ion-title><font color="blue"><b>선거정보수정</b></font></ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content class="sign_menu" *ngFor="let item of items">
+
+    <h6><b>선거명</b></h6>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="electionName" placeholder={{item.e_name}}></ion-input>
+    </ion-item>
+    <br>
+
+    <h6><b>선거기간</b></h6>
+    <ion-item>
+  
+      <ion-calendar [(ngModel)]="dateRange"
+        [options]="optionsRange"
+        [type]="type"
+        [format]="'YYYY-MM-DD'" (selectStart)="selectStartDate($event)" (selectEnd)="selectEndDate($event)">
+      </ion-calendar>
+
+
+    </ion-item>
+
+
+<h6><b>선거시작&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선거종료</b></h6>
+<ion-item>
+{{s_d}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{e_d}}
+</ion-item>
+
+
+
+    <br>
+    <h6><b>유권자명부등록</b></h6>
+    <ion-item lines="none">
+       <font id="fontweight" style="color:#808080">{{file1_name}}</font>
+      <label class="myFakeUploadButton" for="myFileInput"><ion-img src='assets\sw_image\folder.png' style='width:50px;height:50px'></ion-img></label>
+      <input type="file"  id="myFileInput" (change)="onFileChange($event)" />
+    </ion-item>
+    <br>
+    <h6><b>후보자정보등록</b></h6>
+    <ion-item lines="none">
+       <font id="fontweight" style="color:#808080">{{file2_name}}</font>
+      <label class="myFakeUploadButton" for="myFileInput"><ion-img src='assets\sw_image\folder.png' style='width:50px;height:50px'></ion-img></label>
+      <input type="file" id="myFileInput" (change)="onFile2Change($event)" />
+    </ion-item >
+    <br>
+    <h6><b>선거개요</b></h6>
+  
+    <ion-item>
+      <ion-textarea rows="6" [(ngModel)]="summary" placeholder={{item.e_content}}></ion-textarea>
+    </ion-item>
+
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6"></ion-col>
+        <ion-col>
+          <ion-button color="light" [routerLink]="['/tabs/tab5']">취소</ion-button>
+          </ion-col>
+        <ion-col>
+        <ion-button  color="" (click)="submitMultipleForm()">저장</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+ 
+  
+  </ion-content>
+  
+
+  

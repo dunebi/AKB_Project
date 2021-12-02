@@ -1,0 +1,48 @@
+
+<ion-header>
+  <ion-toolbar >
+      <ion-buttons slot="start" >
+          <ion-back-button  color="primary" defaultHref="/tabs/tab2"></ion-back-button>
+        </ion-buttons>
+    <ion-title > <font color="blue"> 명부관리 </font> </ion-title>
+  
+  </ion-toolbar>
+  <ion-row justify-content-center align-items-start >
+    <ion-searchbar [(ngModel)]="searchinput" placeholder="유권자를 검색해보세요"></ion-searchbar>
+  </ion-row>
+</ion-header>
+<ion-content class="menu">
+  <br>
+    <br>
+    <br>
+    <br>
+    <ion-card *ngFor="let item of items" id={{items.indexOf(item)}} >
+     <ion-item>
+          <table class="product_tabel" >
+         
+            <tr>
+                <td rowspan="2"  >
+                  <ion-avatar>
+                    <ion-img src='assets/sw_image/person.png' style='width:100%;height:100%'></ion-img>
+                  </ion-avatar>
+                </td>
+                <td>
+                    <br>
+                    {{item.u_name}}
+                </td>
+            </tr>
+            <tr> 
+              <td>
+               <h6> {{item.u_phonenum}}</h6>  
+              </td> 
+        
+            </tr>
+         
+          </table>
+     
+          <ion-icon slot ="end" id ={{items.indexOf(item)}} (click)="delete($event)" *ngIf ="editflag" name="remove-circle-outline" color="danger" size="large" ></ion-icon>
+
+        </ion-item>
+      </ion-card>
+    </ion-content>
+
